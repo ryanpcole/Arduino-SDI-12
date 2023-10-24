@@ -8,16 +8,32 @@
  *
  * @brief Wait a certain amount of time and then trigger an ISCO sample
  *
- * This is a simple demonstration of triggering an ISCO using an arduino
- *
- * It waits a certain amount of time then triggers the pump to take a sample
+ * This is a simple demonstration of triggering an ISCO using an arduino uno
+ * The ISCO is interfaced with the Arduino uno using teh Campbell Sci sampler
+ * control cable (part#: 10164).
  * 
- * TODO  I need to figure out exactly what kind of signal it takes to trigger a sample.
- *       Also is it a specific signal to trigger a sample or do different signals affect
- *       the programming in the ISCO
+ * According to the manual, to trigger a sampler you must set the control port to 
+ * high (5V) delay for 0.5 seconds, and then set the port low.
+ *  
  * 
- * Or do I have to program the ISCO independently?
- * 
- *
  * 
  */
+
+#include <Arduino.h>
+#define TRIGGER_PIN 7         /*!< The pin connected to control cable yellow */
+
+void setup() {
+
+    pinMode(TRIGGER_PIN, OUTPUT);
+
+}
+
+void loop() {
+
+    digitalWrite(TRIGGER_PIN, HIGH);
+    delay(500);
+    digitalWrite(TRIGGER_PIN, LOW);
+    delay(100000);
+
+
+}
